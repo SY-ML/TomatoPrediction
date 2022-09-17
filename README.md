@@ -1,2 +1,6 @@
 # TomatoPrediction
-Data_PreProcess
+
+# Project Goal : to predict tomato's growth
+# My main role : to preprocess data
+
+
