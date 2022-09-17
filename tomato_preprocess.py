@@ -436,10 +436,3 @@ class PreProcess():
         # print(df['분기'].value_counts())
 
         return df
-
-    def one_hot_encoding(self, df, list_columns):
-        df = pd.get_dummies(df, columns = list_columns)
-
-        return df
-
-
