@@ -1,6 +1,5 @@
-# TomatoPrediction
+# 토마토 성장 예측 프로젝트
 
-# Project Goal : to predict tomato's growth
-# My main role : to preprocess data
+# 역할: 팀장 및 데이터 전처리
 
 
