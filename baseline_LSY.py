@@ -25,21 +25,21 @@ print(f"file_name = {file_name}")
 # 전처리 클래스
 data_directory = "./tomato/"
 pp = PreProcess(data_directory=data_directory, outputBy_colName='Sample_no')
-# vs = Visualize(data_directory=data_directory, outputBy_colName='Sample_no')
+vs = Visualize(data_directory=data_directory, outputBy_colName='Sample_no')
 """파일 설정(시작)"""
 
 
 """데이터 불러오기_인풋 (시작)"""
 # vs.show_scatter_controlled_columns_by(pp.merge_in, '일')
+# exit()
 
 # inputs, test_inputs = pp.input_dfs_outlier_handled() #이상치만 처리한 버전
 inputs, test_inputs = pp.random_forest_model() # 이상치 처리 이후 재배형태/품종 예측한 버전
 inputs, test_inputs = [pp.fill_in_the_unobserved(df) for df in [inputs, test_inputs]] # 미관측치 업데이트한 버전
-inputs, test_inputs = [pp.input_data_transformation(df) for df in [inputs, test_inputs]] #미관측치 처리과정에서 데이터타입이 변하는 현상이 발견되어 추가하였음
 inputs, test_inputs = [pp.input_dfs_feature_engineered(df) for df in [inputs, test_inputs]] # Feature engineering 된 버전
 
 #인풋 이후 결과물을 시각화하려면
-# merge = pd.concat([inputs, test_inputs], axis=0, ignore_index=True)
+merge = pd.concat([inputs, test_inputs], axis=0, ignore_index=True)
 # vs.show_scatter_controlled_columns_by(merge, '주차')
 # vs.show_scatter_controlled_columns_by(merge, '일(주)', "이상시 처리 후 INPUT")
 # vs.show_scatter_controlled_columns_by(merge, '일', "이상시 처리 후 INPUT")
@@ -85,14 +85,22 @@ test_inputs = test_inputs.dropna(axis=1)
 """ nan 포함된 열 드랍 (종료)"""
 
 
-# 품종 원핫인코딩
+
+
+
+# 품종 / 급액EC단계 원핫인코딩
+print(inputs.dtypes)
 
 for df in [inputs, test_inputs]:
-    df = pd.get_dummies(df, columns=['품종', '주차'])
+    df = pd.get_dummies(df, columns=['품종', '급액EC단계', '주차'])
 
 # inputs = pd.get_dummies(inputs, columns=['품종'])
 # test_inputs = pd.get_dummies(test_inputs, columns=['품종'])
+#
+# inputs = pd.get_dummies(inputs, columns=['급액EC단계'])
+# test_inputs = pd.get_dummies(test_inputs, columns=['급액EC단계'])
 
+print(inputs.columns)
 # exit()
 """
 BASELINE
